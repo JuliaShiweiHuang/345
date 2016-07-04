@@ -1,0 +1,238 @@
+\documentclass[12pt]{article}
+\usepackage[multiple]{footmisc}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\graphicspath{{.}}
+\usepackage[export]{adjustbox}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{csquotes}
+\usepackage[mathb]{mathabx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{url}
+ %_______________________________________________________________________________
+    %__MATH
+    %__MATH_GENERAL
+    \usepackage{amsmath, amssymb} %         % mathematical extensions
+    \usepackage[mathb]{mathabx} %           % font for maths symbols e.g. \corresponds
+    \usepackage{bm}             % for boldface greek letters in math
+
+\lstset { %
+    language=C++,
+    backgroundcolor=\color{black!5}, % set backgroundcolor
+    basicstyle=\footnotesize,% basic font setting
+}
+
+\lstset{
+    %frame=tb, % draw a frame at the top and bottom of the code block
+    tabsize=4, % tab space width
+    showstringspaces=false, % don't mark spaces in strings
+    numbers=left, % display line numbers on the left
+   % commentstyle=\color{green}, % comment color
+    %keywordstyle=\color{blue}, % keyword color
+    %stringstyle=\color{red} % string color
+}
+
+
+
+ \geometry{
+ a4paper,
+ total={210mm,297mm},
+ left=10mm,
+ right=10mm,
+ top=30mm,
+ bottom=20mm,
+ }
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{COMP 345}
+\chead{Shiwei Huang}
+\rhead{Homework 2}
+
+%\lfoot{\textbf{I have abided by the Wheaton Honor Code in this work.}}
+\rfoot{Page \thepage}
+
+
+ 
+ 
+\begin{document}
+\textbf{Due date:}{ 10/02/2015}\hfill \break
+\newline
+
+1. Implement producer-consumer problem using only semaphores and where \enquote{item} is a simple \texttt{int}.\hfill 
+\begin{lstlisting}
+//producer-consumer algorithm;
+#define N 100 //number of slots in the buffer;
+semaphore mutex = 1; 
+semaphore emptySlot = N; //counts empty slots in the buffer;
+semaphore fullSlot = 0; //counts full buffer slots;
+
+int buffer[N]; //make a buffer with size N;
+int produced_Items; //number of items produced;
+int item;
+
+void producer () {
+	while (TURE) {
+		item = produce_item(); //generate something;
+		//if there are no empty slots, wait; else, decrement empty slot;
+		wait ( &emptySlot); 
+		//if another thread are using the buffer, wait; else, enter critical region;
+		wait ( &mutex);
+		//CRITICAL REGION. ONLY ONE THREAD COULD HAVE ACCESS TO. Put new item in the buffer;
+		insert_item (item);
+		signal (&mutex); //leave critical region, release the buffer;
+		signal (&fullSlot); //increment number of full slots;
+	}
+	return NULL;
+}
+
+
+void consumer (){
+	while (TRUE) {
+		wait (&fullSlot); //decrement full count;
+		wait (&mutex); //enter critical region;
+		item = remove_item(); //CRITICAL REGION. Take item out from buffer;
+		signal (&mutex); //leave critical region;
+		signal (&emptySlot); //increment number of empty slots;
+		consume_item(item); //do something with the item;
+	}
+	return NULL;
+}
+
+
+
+\end{lstlisting}
+Reference:\footnote{Book P131 Figure 2-28.}\footnote{\url{http://stackoverflow.com/questions/19844716/producer-consumer-program-using-semaphores-and-pthreads}}\hfill 
+\clearpage 
+
+\noindent
+2. What is the difference between the producer-consumer problem above and the reader-writers problem\footnote{Book P171 Figure 2-48.}? \hfil \break
+\break
+Both producer-consumer algorithm and reader-writers algorithm are used when multiple threads need to access a shared resource/buffer; in other words, to solve concurrency problems.\hfil \break The differences:\hfil\break
+1). In the readers-writers problem, at any point, only one writer process can be inside the critical section; which shows in line 28 and line 30, \texttt{wait(\&db)} and \texttt{signal(\&db)} is the \texttt{semaphore db} that separates other writers come to the critical region. \hfill \break
+2). In the readers-writers problem, writers could be the first to access the critical region. However, in the producer-consumer problem, only producer could first access the critical region because the \texttt{semaphore full} initializes to 0. In line 29, \texttt{wait(\&fullSlot)} will block consumer to go for futher steps unless producer goes first.\hfill \break
+3). In the readers-writers problem, more than one reader threads may simultaneously access the resources and \texttt{read\_data\_base()}  in line 14. For example, if a second reader thread want to \texttt{read\_data\_base()}, it could actually do so because the \texttt{if} statement on line 10 keeps \texttt{db} from spinning and allows second, third thread threads to jump to line 13 and \texttt{read\_data\_base()}. However, in the producer-consumer problem, only one thread could access the critical section due to \texttt{wait(\&mutex)} and \texttt{signal(\&mutex)} on line 17 and 19. 
+
+\begin{lstlisting}
+//readers-writers algorithm;
+semaphore mutex = 1; 
+semaphore db = 1;
+int rc = 0; //number of processes reading the data;
+
+void reader () {
+	while (TRUE) { 
+		wait (&mutex); //get access to critical section;
+		rc = rc + 1; //one more reader;
+		if ( rc == 1) { //first reader;
+			wait (&db); 
+		}
+		signal (&mutex); //release critical section;
+		read_data_base();
+		wait (&mutex); //get exclusive access to critical section;
+		rc = rc - 1; //fewer reader;
+		if ( rc == 0 ) { //last reader;
+			signal (&db);
+		}
+		signal (&mutex); //release exclusive access to critical section;
+		use_data_read();
+	}
+}
+
+void writer() {
+	while (TRUE) {
+		think_up_data();
+		wait (&db); //exclusive access to critical section;
+		write_data_base();
+		signal (&db); //release exclusive access to critical section;
+	}
+}
+
+
+\end{lstlisting}
+Reference:\footnote{\url{http://www.codingdevil.com/2014/04/c-program-for-reader-writer-problem.html}}\footnote{\url{http://www.cs.uic.edu/~rchitra1/problems.html}}\hfill \break
+%\clearpage 
+\noindent
+\break
+3. Prove the following property from \textit{bakery algorithm}:
+If $P_i$ is in its critical section and $P_k$ (k != i) has already chosen its 
+\texttt{number[k]!= 0}, then\texttt{(number [i], i) \textless  (number[k], k)}.\hfill \break
+\break
+\noindent
+The central idea for the bakery algorithm is to name processors $1, ..., N$. If two processors choose the same number, then the one with the lowest name goes first. \hfill \break
+During the execution of statement \texttt{while} \texttt{(number [i], i) \textless  (number[k], k)}, processor $i$ read the current value of $number[k]$. Thus, \texttt{(number [i], i) \textless  (number[k], k)} statement must be true. \hfill\break
+\noindent
+\break
+Reference:\footnote{\url{http://research.microsoft.com/en-us/um/people/lamport/pubs/bakery.pdf}}
+
+\noindent
+\break
+4. Show that, if \texttt{wait()} and \texttt{signal()} semaphore operations are not executed atomically, then mutual exclusion may be violated. \hfill \break
+\break
+\noindent
+First, \texttt{wait} and \texttt{signal} semaphore must be executed atomically, meaning only one thread can be executing the code at one time. If both threads are executing \texttt{wait}, then it is possible that both operations are proceeding to decrement the semaphore value, and both threads are proceeding to enter to the critical region, thus violates the mutual exclusion rule. \hfill \break
+
+
+
+\noindent
+5. Modify the \textit{sleeping barber}\footnote{\url{https://en.wikipedia.org/wiki/Sleeping_barber_problem}} solution so that it is clear which customer's hair gets cur next. The program should display the number of the next customer to get his/her hair cut.\hfill \break
+\break
+\noindent
+This algorithm is correct. The algorithm first need to go through \texttt{customer()} since in the \texttt{barber()}, \texttt{custReady = 0}, so that the barber is still asleep. In the \texttt{customer()} section, after the \texttt{signal(custReady)} statement, \texttt{custReady} are being implemented 1 (from 0 to 1), thus, \texttt{barber()} section could run. At this point, in the \texttt{customer()} section, since \texttt{barberReady} = 0 (line 24), thus the \texttt{customer()} thread could not go until \texttt{barber()} thread goes. At this point, line 13: \texttt{signal(barberReady)} is being executed and in line 14, executes \texttt{signal(accessWRSeats)}, which means barber enters into the critical section and cuts hair.\hfill \break
+The \texttt{cout} statement under \texttt{barber} section could indicates the first, second etc customers get hair cut based on \texttt{numberOfFreeWRSeats} available.
+
+\begin{lstlisting}
+# sleeping barber solution
+# The first two are mutexes (only 0 or 1 possible)
+Semaphore barberReady = 0
+Semaphore accessWRSeats = 1     # if 1, the # of seats in the waiting room can be incremented or decremented
+Semaphore custReady = 0         # the number of customers currently in the waiting room, ready to be served
+int numberOfFreeWRSeats = N     # total number of seats in the waiting room
+
+def Barber():
+  while true:                   # Run in an infinite loop.
+    wait(custReady)             # Try to acquire a customer - if none is available, go to sleep.
+    wait(accessWRSeats)         # Awake - try to get access to modify # of available seats, otherwise sleep.
+    numberOfFreeWRSeats += 1    # One waiting room chair becomes free.
+    signal(barberReady)         # I am ready to cut.
+    signal(accessWRSeats)       # Don't need the lock on the chairs anymore.
+    #Cut hair here.
+    cout numberOfFreeWRSeats
+
+def Customer():
+    wait(accessWRSeats)         # Try to get access to the waiting room chairs.
+    if numberOfFreeWRSeats > 0: # If there are any free seats:
+      numberOfFreeWRSeats -= 1  #   sit down in a chair
+      signal(custReady)         #   notify the barber, who's waiting until there is a customer
+      signal(accessWRSeats)     #   don't need to lock the chairs anymore
+      wait(barberReady)         #   wait until the barber is ready
+     
+    else:                       # otherwise, there are no free seats; tough luck --
+      signal(accessWRSeats)     #   but don't forget to release the lock on the seats!
+      # (Leave without a haircut.)
+\end{lstlisting}
+
+
+\noindent
+Reference:
+\footnote{\url{http://brahms.emu.edu.tr/rza/comp483week4.pdf}}
+
+
+
+
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+{\textbf{I have abided by the Wheaton Honor Code in this work.    }}\hfill \break
+
+%\includegraphics[width=0.2\textwidth, right]{signature4}
+\end{document}

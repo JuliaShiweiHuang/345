@@ -1,0 +1,15 @@
+\ci \cam \cjust \cgoing \cto \cwrite
+\Ca \Cbunch \Cof 
+
+\utexts
+
+\uand \usee
+
+\uwhether
+this
+
+\uprogram
+
+could \uwork even \uwithout \Cthreads.
+
+\uso. hopefully this could \uwork. 

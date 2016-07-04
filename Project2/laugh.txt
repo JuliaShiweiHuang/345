@@ -1,0 +1,12 @@
+\ci am going to \uschool today
+\cagain, \ci want to fully test my \uprogram
+\Cso \Ci am \Cwriting \uthis long text to \usee whether
+my program would work on this \ctext \cfile
+or \Cnot. 
+
+break \Cis \Cgood. \ci finally \ugot some
+relaxation done \uand \usaw \ufriends.
+
+it's \Cnice \Cto \Chave \Cfriends around, 
+\claugh together and cry \Ctogether.
+

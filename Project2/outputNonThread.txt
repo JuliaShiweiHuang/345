@@ -1,0 +1,15 @@
+ I Am Just Going To Write
+ A BUNCH OF 
+ 
+ _texts_
+ 
+ _and_ _see_
+ 
+ _whether_
+ this
+ 
+ _program_
+ 
+ could _work_ even _without_ THREADS.
+ 
+ _so_. hopefully this could _work_. 

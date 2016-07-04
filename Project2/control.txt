@@ -1,0 +1,9 @@
+\Chello \cmy \Cname \Cis \Cshiwei
+here, \ui am \ujust \Cgonna \Ctest some random
+\cwords and \usee \uwhether I could \Ctake \Cout \Ccontrol
+sequences.
+
+\Chello \cmy \Cname \Cis \Cshiwei
+here, \ci am \cjust \ugonna \Ctest some random
+\cwords and \usee \Cwhether I could \Ctake \Cout \Ccontrol
+sequences.

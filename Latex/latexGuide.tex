@@ -1,0 +1,126 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{textcomp}
+\begin{document}
+% Example 1
+\ldots when Einstein introduced his formula \begin{tabular}{@{} l @{}}
+\hline
+no leading space\\
+\hline
+\end{tabular}
+\begin{tabular}{|r|l|}
+\hline
+7C0 & hexadecimal \\
+3700 & octal \\ \cline{2-2}
+11111000000 & binary \\
+\hline \hline
+1984 & decimal \\
+\hline
+\end{tabular}
+A typographical rule of thumb
+for the line length is:
+\begin{tabular}{c r @{.} l}
+Pi expression &
+\multicolumn{2}{c}{Value} \\
+\hline
+$\pi$ & 3&1416 \\
+$\pi^{\pi}$ & 36&46 \\
+$(\pi^{\pi})^{\pi}$ & 80662&7 \\
+\end{tabular}
+Add $a$ squared and $b$ squared
+to get $c$ squared. Or, using
+a more mathematical approach:
+$a^2 + b^2 = c^2$
+Figure~\ref{white} is an example of Pop-Art.
+\TeX{} is pronounced as
+$\tau\epsilon\chi$\\[5pt]
+100~m$^{3}$ of water\\[5pt]
+100$ m^3$ of water 
+This comes from my $\heartsuit$
+\begin{figure}[!hbtp]
+\makebox[\textwidth]{\framebox[5cm]{\rule{0pt}{5cm}}}
+\caption{Five by Five in Centimetres.\label{white}}
+\end{figure}
+
+
+\begin{quote}
+On average, no line should
+be longer than 66 characters.
+\end{quote}
+This is why \LaTeX{} pages have
+such large borders by default
+and also why multicolumn print
+is used in newspapers.
+The \verb|\ldots| command \ldots
+\begin{verbatim}
+10 PRINT "HELLO WORLD ";
+20 GOTO 10
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+
+using namespace std;
+
+class monkey {
+public:
+    bool hungry; //1(a) a bool hungry.
+    monkey(){cout << "Hello, I'm the constructor from class monkey that takes no input." << endl;}; //1(b) a constructor that takes no input. 
+    monkey (bool something){cout << "Hello, I'm the constructor from class monkey that takes a bool as input." << endl;}; //1(c) a constructor that takes a bool as its input.
+    ~monkey(){cout << "Hello, I'm the descructor from class monkey." << endl;}; //1(d) a destructor. \hfill \break
+    void eatBanana () {cout << "Hello, I am the function eatBanana that takes no input." << endl; }; //1(e) a function eatBanana that takes no input.
+    virtual void monkeyAround () {cout << "Hello, I'm the virtual function from class monkey that takes no input." << endl;}; // a virtual function monkeyAround that takes no input.
+};
+\end{verbatim}
+
+\begin{tabular}{|r|l|}
+\hline
+7C0 & hexadecimal \\
+3700 & octal \\ \cline{2-2}
+11111000000 & binary \\
+\hline \hline
+1984 & decimal \\
+\hline
+\end{tabular}
+
+
+\begin{equation}
+e = m \cdot c^2 \; ,
+\end{equation}
+which is at the same time the most widely known
+A reference to this subsection
+\label{sec:this} looks like:
+‘‘see section~\ref{sec:this} on
+page~\pageref{sec:this}.’’ \underline{something}
+and the least well understood physical formula. $0$, $1$, and $-1$
+% Example 2
+\ldots from which follows\\* Kirchhoff’s current law:
+\begin{equation}
+\sum_{k=1}^{n} I_k = 0 \; .
+\end{equation}
+Kirchhoff’s voltage law can be derived \ldots
+% Example 3
+\ldots which has several advantages.
+\flushleft
+\begin{enumerate}
+\item You can nest the list
+environments to your taste:
+\begin{itemize}
+\item But it might start to
+look silly.
+\item[-] With a dash.
+\end{itemize}
+\item Therefore remember:
+\begin{description}
+\item[Stupid] things will not
+become smart because they are
+in a list.
+\item[Smart] things, though,
+can be presented beautifully
+in a list.
+\end{description}
+\end{enumerate}
+\begin{equation}
+I_D = I_F - I_R
+\end{equation}
+is the core of a very different transistor model. read/writer \texteuro 3 ead\slash write
+\hyphenation{FORTRAN Hy-phen-a-tion}  \ldots 
+\end{document}

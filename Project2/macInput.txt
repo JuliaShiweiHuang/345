@@ -1,0 +1,7 @@
+\ui \uam \umaking another test \ufile
+too \csee \Cwhether \Cthere are \Cany
+bugs for my \ucurrent \utext \Cfile.
+
+i \Cdon't \Ckonw
+why \cand \uwhats \Cwrong \Cwith \cmy
+\ccurrent \uprogram

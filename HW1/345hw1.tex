@@ -1,0 +1,162 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\graphicspath{{.}}
+\usepackage[export]{adjustbox}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[bottom]{footmisc}
+ \geometry{
+ a4paper,
+ total={210mm,297mm},
+ left=10mm,
+ right=10mm,
+ top=30mm,
+ bottom=20mm,
+ }
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{COMP 345}
+\chead{Shiwei Huang}
+\rhead{Homework 1}
+
+%\lfoot{\textbf{I have abided by the Wheaton Honor Code in this work.}}
+\rfoot{Page \thepage}
+
+ 
+ 
+\begin{document}
+\textbf{Due date:}{ 09/11/2015}\hfill \break
+\newline
+\textbf{I. Text problems, Chapter 1: 1, 2, 3, 5, 8, 13}\hfill \break
+\newline
+1. Answer:\newline
+(1) Operating system provide a layer of abstraction for using disks. Programs can be created without dealing with the hardware stuff. \hfill \break
+(2) Operating systems provide for an orderly and controlled allocation of the processors, memories, timers, disks, mice, network interfaces, printers etc. It allow multiple programs to be in memory and run at the same time by buffering all the output destined for the printer on the disk.  \hfill  \break
+\newline
+2. Answer:\newline
+(1) Mainframe Operating Systems\hfill  \break
+Mainframe operating systems typically offering batch, traction processing, and timesharing. \hfill  \break
+Example: OS/360\hfill \break \\
+(2) Server Operating Systems\hfill  \break
+Server operating systems serve multiple users at once over a network and allow the users to share hardware and software resources. Servers can provide print service, file service, or Web service. \hfill  \break 
+Example: Linux\hfill  \break \\
+(3) Multiprocessor Operating Systems\hfill  \break
+Recently, conventional desktop and notebook operating systems are starting to deal with multiprocessors.\hfill  \break
+Example: Linux and Windows run on multiprocessors, which means the operating system connect multiple processors into a single operating system. \hfill  \break \\
+(4) Personal Computer Operating Systems\hfill  \break
+Personal computer operating system provides good support to a single user.\hfill  \break
+Example: Linux, Windows 8, Windows 10\hfill  \break \\
+(5) Handheld Computer Operating Systems \hfill  \break
+A handheld computer, originally known as PDA (Personal digital assistant), is a small computer that can be held in your hand during operation. Smartphones and tablets are best known examples. \hfill  \break 
+Example: Android, OS X Mavericks {\scriptsize(Mavericks is the best surfing spot in northern California!!)}, OS X El Capitan {\scriptsize(named after Yosemite National Park!! Go rock climbing!!)},  iOS8, iOS9 {\scriptsize(coming this fall!!)}, smartisan OS{\scriptsize(an Android based operating system made by Smartisan tech, Chinese Hammer Technology)}\hfill \break \\
+(6) Embedded Operating Systems\hfill  \break
+Embedded systems run on the computers that control devices and generally do not accept user-installed software. \hfill  \break
+Example: MP3 player\hfill  \break \\
+(7) Sensor-Node Operating Systems\hfill  \break
+Sensor networks are used to protect the perimeter of buildings, guard national borders, detect fires in forests, measure temperature etc. \hfill  \break
+Example: TinyOS\hfill  \break \\ \\
+(8) Real Time Operating Systems\hfill  \break
+Real time operating systems are characterized by having time as a key parameter. In industrial process-control systems, real-time computers have to collect data about the production process and use it to control machines in the factory. \hfill  \break
+Example: eCos\hfill  \break \\
+(9) Smart Card Operating Systems\hfill  \break
+Smart card operating systems run on smart cards, which are credit-card-sized devices containing a CPU chip. \hfill  \break
+Example: credit-card-sized devices containing a CPU chip\hfill  \break
+\newline
+3. \textit{Multiprogramming} keeps CPU busy at all times and swap jobs in and out.\hfill  \break
+\textit{Timesharing} is a variant of multiprogramming. Each user has an online terminal that multiple users interact with the system in real time. \hfill  \break
+\newline
+5. Computer would partition the memory into several pieces, with a different job in each partition (Figure on pg12). While one job was waiting for I/O to complete, another job could be using the CPU. If enough jobs could be held in main memory at once, the CPU could be kept busy nearly 100 percent of the time. \hfill  \break
+\newline
+8. Answer \hfill \break
+(1) First of all, 1 character takes 1 byte \hfill \break
+
+\begin{equation}
+25 \times 80 = 2000  \ bytes 
+\end{equation} 
+\begin{equation}
+1 KB = 1024 \ bytes
+\end{equation}
+Thus, RAM needed to support the monochrome text screen is
+\begin{equation}
+ 2000 bytes = 1.953125 \ KB
+ \end{equation}
+ The cost for the RAM in the 1980 prices is:
+ \begin{equation}
+ 1.95KB \times \$5/KB = \$9.75
+ \end{equation}
+ The cost for the RAM in the 2015 price\footnote{http://www.jcmit.com/memoryprice.htm} is:
+ \begin{equation}
+ 1.95KB \times \$0.00000548303/KB = \$0.00001069191
+\end{equation}
+\newline
+(2) One pixel has 3 bytes
+\begin{equation}
+1200 \times 900 = 1,080,000 \ pixels
+\end{equation}
+\begin{equation}
+1,080,000 pixels \times 3 = 3,240,000 bytes = 3,164KB = 3MB
+\end{equation}
+The cost for the RAM in the 1980 prices is:
+ \begin{equation}
+ 3,164KB \times \$5/KB = \$15,820
+ \end{equation}
+The cost for the RAM in the 2015 price is:
+ \begin{equation}
+3,164KB \times \$0.00000548303/KB = \$0.017
+\end{equation} 
+\newline 
+13. Depending on the CPU on getting the program, there are four cases and the total run time could be 20, 25, 30 or 35 msec:\hfill \break
+Case 1: \hfill \break
+One CPU has P0 and P1 which in total takes 15 msec; One CPU has P2 which takes 20 msec. So total time is 20 msec. \hfill \break
+Case 2: \hfill \break
+One CPU has P0 and P2 which in total takes 25 msec; One CPU has P1 which takes 10 msec \hfill \break
+Case 3: \hfill \break
+One CPU has P1 and P2 which in total takes 30 msec; One CPU has P0 which takes 5 msec. \hfill \break
+Case 4: \hfill \break
+One CPU has three programs, which in total takes 35 msec. \hfill \break
+\newline
+\textbf{II. Text problems, Chapter 2: 3, 5, 8}\hfill \break 
+\newline
+3. The interrupt procedure does whatever it has in order to handle the interrupt. Then it can unblock the driver that was waiting for it. This model works best if drivers are structured as kernel processes, which is most suitable for the lower-level assembly language. \hfill \break
+\newline
+5.  The figure on pg96 explains the situation:
+\begin{equation}
+CPU  utilization = 1 - p^ n
+\end{equation}
+A process has 50\% I/O and has 5 programs in use, thus:
+\begin{equation}
+1 - 0.5^5 = 0.96875 
+\end{equation}
+Thus, computer has around 96.875\% CPU utilization. So only 3.125\% of the CPU is wasted.\hfill \break
+\newline
+8. Based on the same formula:
+\begin{equation}
+CPU  utilization = 1 - p^ n
+\end{equation}
+The computer has 6 programs in memory at the same time and each process spends 40\% of its time waiting for I/O. Thus,
+\begin{equation}
+1-0.4^6 = 0.995904
+\end{equation}
+of the CPU utilization. Thus, 99.59\% of the CPU got utilized.\hfill \break
+\newline \\
+\textbf{III. Figure 1-30, pg76}\hfill \break 
+(a)\textit{ .h} header files contain declarations and definitions used by one or more code files.\hfill \break
+(b) When \textit{.c} file is called, it invokes the C compiler and creates \textit{.o} object file. When each \textit{.o} file is ready, they are passed to a program called the linker to combine all of them into a single executable binary file by the CPU. \hfill \break
+(c)	The first pass of the C compiler is called the \textit{C preprocessor}. The \textit{C preprocessor} reads each \textit{.c} file, gets the header file named in it and process the results to the next pass of the compiler. \hfill \break
+(d) \textit{linker} combines all \textit{.o} files into a single executable binary file. \hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+{\textbf{I have abided by the Wheaton Honor Code in this work. Solution is my own work but Google is used for Chap 1 Question 8 and 13.    }}\hfill \break
+
+%{\textbf{Solution is my own work but Google is used for Chap 1 Question 8 and 13.}
+%\includegraphics[width=0.2\textwidth, right]{signature4}
+\end{document}
